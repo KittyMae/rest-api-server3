@@ -1,7 +1,6 @@
 import pytest
 import requests
 from urllib.parse import urlencode
-from app import app
 
 # @pytest.fixture
 # def test_server():
