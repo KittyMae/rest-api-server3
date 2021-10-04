@@ -35,7 +35,7 @@ API base url: `http://localhost:5000/api/v1`
   ```json
   {
 	"filename": "test.txt",
-	"message": 'File successfully stored"
+	"message": "File successfully stored"
   }
   ```
   
@@ -45,7 +45,7 @@ API base url: `http://localhost:5000/api/v1`
   ```json
   {
 	"filename": "test.txt",
-    "message": 'Histogram successfully retrieved",
+    "message": "Histogram successfully retrieved",
     "occurences": 2,
     "text": "xxx"
   }
@@ -57,7 +57,7 @@ API base url: `http://localhost:5000/api/v1`
   ```json
   {
 	"filename": "test.txt",
-    "message": 'Text successfully replaced",
+    "message": "Text successfully replaced",
     "replacedOccurences": 2,
 	"replacement": "yyy",
     "text": "xxx"
@@ -70,7 +70,7 @@ API base url: `http://localhost:5000/api/v1`
   ```json
   {
 	"filename": "test.txt",
-    "message": 'File successfully deleted",
+    "message": "File successfully deleted",
   }
   ```
 
