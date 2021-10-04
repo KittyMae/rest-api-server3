@@ -78,7 +78,7 @@ def test_replace_text_check_status_code_equals_400(client, filename, text, repla
     assert response.status_code == 400
 
 @pytest.mark.parametrize("filename", ["animals.txt", "fruits.txt"])
-def test_delete_file_check_status_code_equals_201(app, client, filename):
+def test_delete_file(app, client, filename):
     data = {'filename': filename}  
     response = client.post("/api/v1/delete-file", data=data, content_type='multipart/form-data')
     output = json.loads(response.get_data(as_text=True))
