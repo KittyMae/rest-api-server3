@@ -31,7 +31,8 @@ API base url: `http://localhost:5000/api/v1`
 
 * `/store-file` (method `POST`)
   Input: `filename`, `file`
-  Output
+  
+  Output:
   ```json
   {
 	"filename": "test.txt",
@@ -41,6 +42,7 @@ API base url: `http://localhost:5000/api/v1`
   
 * `/retrieve-histogram` (method `GET`)
   Input params: `filename`, `text`
+  
   Output:
   ```json
   {
@@ -53,6 +55,7 @@ API base url: `http://localhost:5000/api/v1`
 
 * `/replace-text` (method `POST`)
   Input: `filename`, `text`, `replacement`
+  
   Output:
   ```json
   {
@@ -65,7 +68,8 @@ API base url: `http://localhost:5000/api/v1`
   ```
 
 * `/delete-file` (method `POST`)
-  Input: `filename`, `text`, `replacement`
+  Input: `filename`
+  
   Output:
   ```json
   {
