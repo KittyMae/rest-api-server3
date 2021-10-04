@@ -1,8 +1,9 @@
 import os
-from app import app
-from flask import Flask, request, jsonify
+from flask import Flask, Blueprint, request, jsonify, current_app
 
-@app.route('/store-file', methods=['POST'])
+api = Blueprint('api', __name__)
+
+@api.route('/store-file', methods=['POST'])
 def upload_file():
     if 'filename' not in request.form:
         resp = jsonify({'message' : "Missing 'filename' parameter"})
@@ -15,12 +16,12 @@ def upload_file():
     filename = request.form.get('filename')
     file = request.files['file']
     if file:
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        file.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
         resp = jsonify({'message' : "File successfully stored"})
         resp.status_code = 201
         return resp
 
-@app.route('/retrieve-histogram', methods=['GET'])
+@api.route('/retrieve-histogram', methods=['GET'])
 def retrieve_histogram():
     print(request.args)
     if 'filename' not in request.args:
@@ -33,7 +34,7 @@ def retrieve_histogram():
         return resp
     filename = request.args.get('filename')
     text = request.args.get('text')
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     if not os.path.isfile(filepath):
         resp = jsonify({'filename' : filename, 'text' : text, 'message' : "File not found"})
         resp.status_code = 400
@@ -45,7 +46,7 @@ def retrieve_histogram():
     resp.status_code = 201
     return resp
 
-@app.route('/replace-text', methods=['POST'])
+@api.route('/replace-text', methods=['POST'])
 def replace_text():
     if 'filename' not in request.form:
         resp = jsonify({'message' : "Missing 'filename' parameter"})
@@ -62,7 +63,7 @@ def replace_text():
     filename = request.form.get('filename')
     text = request.form.get('text')
     replacement = request.form.get('replacement')
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     if not os.path.isfile(filepath):
         resp = jsonify({'filename' : filename, 'text' : text, 'replacement' : replacement, 'message' : "File not found"})
         resp.status_code = 400
@@ -78,7 +79,7 @@ def replace_text():
     resp.status_code = 201
     return resp
 
-@app.route('/delete-file', methods=['POST'])
+@api.route('/delete-file', methods=['POST'])
 def replace():
     print(request.form)
     if 'filename' not in request.form:
@@ -86,7 +87,7 @@ def replace():
         resp.status_code = 400
         return resp    
     filename = request.form.get('filename')
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    filepath = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     if not os.path.isfile(filepath):
         resp = jsonify({'filename' : filename, 'message' : "File not found"})
         resp.status_code = 400
